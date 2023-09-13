@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 app.disable('x-powered-by')
 
-const persons = [
+let persons = [
   { 
     id: 1,
     name: "Arto Hellas", 
@@ -24,6 +24,13 @@ const persons = [
     number: "39-23-6423122"
   }
 ]
+
+const generateId = () => {
+  const maxVal = 100000
+  return Math.floor(Math.random() * maxVal)
+}
+
+app.use(express.json())
 
 app.get('/', (request, response) => {
   response.send('Phonebook API')
@@ -49,10 +56,22 @@ app.get('/api/persons/:id', (request, response) => {
   response.status(404).end()
 })
 
+app.post('/api/persons', (request, response) => {
+  const { name, number } = request.body
+
+  persons = persons.concat({
+    id: generateId(),
+    name,
+    number
+  })
+
+  response.status(201).json(persons)
+})
+
 app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
-  const newPersons = persons.filter(person => person.id !== id)
-  console.log(newPersons);
+  persons = persons.filter(person => person.id !== id)
+  console.log(persons);
   
   response.status(204).end()
 })
