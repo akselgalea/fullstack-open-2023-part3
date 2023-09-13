@@ -1,0 +1,17 @@
+### Get all
+GET http://localhost:3001/api/persons/
+
+### Get by ID
+GET http://localhost:3001/api/persons/1
+
+### Create a resource
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+  "name": "Axel",
+  "number": "1234567890"
+}
+
+### Delete person in phonebook
+DELETE http://localhost:3001/api/persons/1
