@@ -37,6 +37,7 @@ const generateId = () => {
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 
 app.use(cors())
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 app.get('/', (request, response) => {
@@ -74,13 +75,15 @@ app.post('/api/persons', (request, response) => {
     return response.status(400).json({ error: 'name must be unique' })
   }
 
-  persons = persons.concat({
+  const newPerson = {
     id: generateId(),
     name,
     number
-  })
+  }
 
-  response.status(201).json(persons)
+  persons = persons.concat(newPerson)
+
+  response.status(201).json(newPerson)
 })
 
 app.delete('/api/persons/:id', (request, response) => {
