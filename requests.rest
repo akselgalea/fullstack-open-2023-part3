@@ -1,11 +1,11 @@
 ### Get all
-GET http://localhost:3001/api/persons/
+GET https://fullstackopen2023-phonebook-backend.onrender.com/api/persons
 
 ### Get by ID
-GET http://localhost:3001/api/persons/1
+GET https://fullstackopen2023-phonebook-backend.onrender.com/api/persons/1
 
 ### Create a resource
-POST http://localhost:3001/api/persons
+POST https://fullstackopen2023-phonebook-backend.onrender.com/api/persons
 content-type: application/json
 
 {
@@ -14,4 +14,4 @@ content-type: application/json
 }
 
 ### Delete person in phonebook
-DELETE http://localhost:3001/api/persons/1
+DELETE https://fullstackopen2023-phonebook-backend.onrender.com/api/persons/1
