@@ -3,8 +3,8 @@ Hi, here's the link to the commit where i changed the api url in the frontend to
 https://github.com/akselgalea/fullstack-open-2023/commit/dc8deb8c36bc6601d5577ef7f86c47119c1411df
 
 
-The backend was deployed using Render.
+The app was deployed using Render.
 
-[Click here](https://fullstackopen2023-phonebook-backend.onrender.com) to access the phonebook backend on the internet!
+[Click here](https://fullstackopen2023-phonebook-backend.onrender.com) to access the phonebook app on the internet!
 
 [Click here](https://fullstackopen2023-phonebook-backend.onrender.com/api/persons) to see the list of persons
