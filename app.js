@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
+const { notFoundMiddleware } = require('./middleware/notFound')
+
 app.disable('x-powered-by')
 
 let persons = [
@@ -31,6 +34,7 @@ const generateId = () => {
 }
 
 app.use(express.json())
+app.use(morgan('tiny'))
 
 app.get('/', (request, response) => {
   response.send('Phonebook API')
@@ -83,6 +87,8 @@ app.delete('/api/persons/:id', (request, response) => {
   
   response.status(204).end()
 })
+
+app.use(notFoundMiddleware)
 
 
 const PORT = 3001
