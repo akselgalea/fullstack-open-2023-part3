@@ -2,7 +2,7 @@
 GET https://fullstackopen2023-phonebook-backend.onrender.com/api/persons
 
 ### Get by ID
-GET https://fullstackopen2023-phonebook-backend.onrender.com/api/persons/1
+GET https://fullstackopen2023-phonebook-backend.onrender.com/api/persons/65045a2b8934917a0b8ba917
 
 ### Create person
 POST https://fullstackopen2023-phonebook-backend.onrender.com/api/persons
