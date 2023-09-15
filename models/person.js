@@ -3,10 +3,10 @@ const url = process.env.MDB_URI
 
 mongoose.set('strictQuery', false)
 
-mongoose.connect(url).then(result => {
-  console.log('Connected to MongoDB');
+mongoose.connect(url).then(() => {
+  console.log('Connected to MongoDB')
 }).catch(error => {
-  console.log('Error connecting to MongoDB:', error.message);
+  console.log('Error connecting to MongoDB:', error.message)
 })
 
 const personSchema = new mongoose.Schema({

@@ -9,7 +9,7 @@ const Person = require('./models/person')
 
 app.disable('x-powered-by')
 
-morgan.token('body', (req, res) => JSON.stringify(req.body))
+morgan.token('body', (req,) => JSON.stringify(req.body))
 
 app.use(cors())
 app.use(express.static('dist'))
@@ -34,7 +34,7 @@ app.get('/api/persons', (request, response, next) => {
 app.get('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id).then(person => {
     if(person) return response.json(person)
-    
+
     response.status(404).end()
   }).catch(error => next(error))
 })
@@ -63,17 +63,17 @@ app.put('/api/persons/:id', (request, response, next) => {
   }
 
   Person.findByIdAndUpdate(request.params.id, person, { new: true, runValidators: true, context: 'query' })
-  .then(updatedPerson => {
-    if(updatedPerson) return response.json(updatedPerson)
+    .then(updatedPerson => {
+      if(updatedPerson) return response.json(updatedPerson)
 
-    response.status(404).end()
-  }).catch(error => next(error))
+      response.status(404).end()
+    }).catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id).then(result => {
     if(result) return response.status(204).end()
-    
+
     response.status(404).end()
   }).catch(error => next(error))
 })
