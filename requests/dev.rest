@@ -14,4 +14,4 @@ content-type: application/json
 }
 
 ### Delete person in phonebook
-DELETE http://localhost:3001/api/persons/1
+DELETE http://localhost:3001/api/persons/650462f20fa96531af373da2

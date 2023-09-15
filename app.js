@@ -59,11 +59,10 @@ app.post('/api/persons', (request, response) => {
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter(person => person.id !== id)
-  console.log(persons);
-  
-  response.status(204).end()
+  Person.findByIdAndDelete(request.params.id).then(res => {
+    if(!res) return response.status(404).end()
+    response.status(204).end()
+  })
 })
 
 app.use(notFoundMiddleware)
