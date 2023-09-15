@@ -3,7 +3,8 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
-const { notFoundMiddleware } = require('./middleware/notFound')
+const notFound = require('./middleware/notFound')
+const errorHandler = require('./middleware/errorHandler')
 const Person = require('./models/person')
 
 app.disable('x-powered-by')
@@ -20,28 +21,30 @@ app.use(express.static('dist'))
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
-app.get('/info', (request, response) => {
+app.get('/info', (request, response, next) => {
   Person.find({}).then(persons => {
     response.send(`
       Phonebook has info for ${persons.length} people <br/>
       ${new Date()}
     `)
-  })
+  }).catch(error => next(error))
 })
 
-app.get('/api/persons', (request, response) => {
+app.get('/api/persons', (request, response, next) => {
   Person.find({}).then(persons => {
     response.json(persons)
-  })
+  }).catch(error => next(error))
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id).then(person => {
-    response.json(person)
-  })
+    if(person) return response.json(person)
+    
+    response.status(404).end()
+  }).catch(error => next(error))
 })
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
   const { name, number } = request.body
 
   if(!name || !number) {
@@ -55,18 +58,19 @@ app.post('/api/persons', (request, response) => {
 
   person.save().then(savedPerson => {
     response.status(201).json(savedPerson)
-  })
+  }).catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (request, response) => {
-  Person.findByIdAndDelete(request.params.id).then(res => {
-    if(!res) return response.status(404).end()
-    response.status(204).end()
-  })
+app.delete('/api/persons/:id', (request, response, next) => {
+  Person.findByIdAndDelete(request.params.id).then(result => {
+    if(result) return response.status(204).end()
+    
+    response.status(404).end()
+  }).catch(error => next(error))
 })
 
-app.use(notFoundMiddleware)
-
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = 3001
 app.listen(PORT, () => {
