@@ -9,11 +9,6 @@ const Person = require('./models/person')
 
 app.disable('x-powered-by')
 
-const generateId = () => {
-  const maxVal = 100000
-  return Math.floor(Math.random() * maxVal)
-}
-
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 
 app.use(cors())
@@ -84,7 +79,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
 app.use(notFound)
 app.use(errorHandler)
 
-const PORT = 3001
+const PORT = process.env.PORT ?? 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
