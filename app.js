@@ -48,19 +48,14 @@ app.post('/api/persons', (request, response) => {
     return response.status(400).json({ error: 'name and number are required' })
   }
 
-  if(persons.some(person => person.name === name)) {
-    return response.status(400).json({ error: 'name must be unique' })
-  }
-
-  const newPerson = {
-    id: generateId(),
+  const person = new Person({
     name,
     number
-  }
+  })
 
-  persons = persons.concat(newPerson)
-
-  response.status(201).json(newPerson)
+  person.save().then(savedPerson => {
+    response.status(201).json(savedPerson)
+  })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
