@@ -4,13 +4,22 @@ GET https://fullstackopen2023-phonebook-backend.onrender.com/api/persons
 ### Get by ID
 GET https://fullstackopen2023-phonebook-backend.onrender.com/api/persons/1
 
-### Create a resource
+### Create person
 POST https://fullstackopen2023-phonebook-backend.onrender.com/api/persons
 content-type: application/json
 
 {
   "name": "Axel",
   "number": "1234567890"
+}
+
+### Update person
+PUT https://fullstackopen2023-phonebook-backend.onrender.com/api/persons/65045a2b8934917a0b8ba917
+Content-Type: application/json
+
+{
+  "name": "Arto Vihavainen",
+  "number": "045-123457"
 }
 
 ### Delete person in phonebook
