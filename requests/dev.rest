@@ -9,17 +9,17 @@ POST http://localhost:3001/api/persons
 content-type: application/json
 
 {
-  "name": "Ax",
-  "number": "1234567890"
+  "name": "Axel",
+  "number": "09-1234556"
 }
 
 ### Update person
-PUT http://localhost:3001/api/persons/6504a725fa1a1f87d7cedb0a
+PUT http://localhost:3001/api/persons/650463060fa96531af373da5
 Content-Type: application/json
 
 {
-  "name": "a",
-  "number": "045-123457"
+  "name": "Yenn",
+  "number": "022-1234556"
 }
 
 ### Delete person in phonebook
